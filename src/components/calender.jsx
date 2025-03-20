@@ -183,6 +183,41 @@ const CalendarApp = () => {
     setSelectedEvent(null);
   };
 
+  const checkAndAddReminders = () => {
+    const now = new Date();
+    const updatedReminders = [...reminders];
+  
+    events.forEach((event) => {
+      const eventTime = new Date(event.start);
+      const timeDifference = (eventTime - now) / (1000 * 60); // Convert to minutes
+  
+      if (timeDifference > 0 && timeDifference <= 30) {
+        const exists = reminders.some((rem) => rem.id === event.id);
+        if (!exists) {
+          const newReminder = {
+            id: event.id,
+            title: `Upcoming: ${event.title}`,
+            description: `Your event '${event.title}' is starting soon!`,
+            start: eventTime,
+          };
+  
+          updatedReminders.push(newReminder);
+          toast.info(`Reminder added: ${event.title} in 30 minutes!`);
+        }
+      }
+    });
+  
+    if (updatedReminders.length !== reminders.length) {
+      setReminders(updatedReminders);
+      localStorage.setItem("reminders", JSON.stringify(updatedReminders));
+    }
+  };
+
+  useEffect(() => {
+    const interval = setInterval(checkAndAddReminders, 60 * 1000); // Runs every 60 seconds
+    return () => clearInterval(interval); // Cleanup on unmount
+  }, [events, reminders]);
+
 
   return (
     <div className="app-container">
@@ -264,7 +299,16 @@ const CalendarApp = () => {
       {/* Reminders List */}
   
         <div className="reminders-list" style={{ width: "200px" }}>
-          <h2>Event Details</h2>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <h2>Event Details</h2>
+            <button 
+              className="delete-btn" 
+              onClick={closeEventDetails} 
+              style={{ marginRight: '5px' }}
+            >
+              ❌
+            </button>
+          </div>
           {selectedEvent && (
             <div className="event-details">
               <p><strong>Title:</strong> {selectedEvent.title}</p>
@@ -280,6 +324,7 @@ const CalendarApp = () => {
         
         <div className="reminders-list">
           <h2>Reminders</h2>
+          <p>We will remind you 30 minutes before the event starts</p>
           <ul>
             {reminders.map((reminder, index) => (
               <li key={index} className="reminder-item">
