@@ -17,6 +17,7 @@
     "react-dom": "^19.0.0",
     "react-redux": "^9.2.0",
     "react-scripts": "5.0.1",
+    "react-toastify": "^11.0.5",
     "redux-toolkit": "^1.1.2",
     "rrule": "^2.8.1",
     "tailwindcss": "^4.0.14",

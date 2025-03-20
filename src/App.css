@@ -23,6 +23,80 @@ body {
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
+
+/* Optional: Customize scrollbar for better look */
+.events-list::-webkit-scrollbar,
+.reminders-list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.events-list::-webkit-scrollbar-thumb,
+.reminders-list::-webkit-scrollbar-thumb {
+  background: #888;  /* Scrollbar color */
+  border-radius: 10px;
+}
+
+.events-list::-webkit-scrollbar-thumb:hover,
+.reminders-list::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+.reminders-list {
+  width: 250px;
+  background: #ffffff;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+  text-align: left;
+  font-family: "Arial", sans-serif;
+}
+
+.reminders-list:hover {
+  transform: translateY(-3px);
+}
+
+.reminders-list h2 {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #333;
+  text-align: center;
+  border-bottom: 2px solid #00b894;
+  padding-bottom: 5px;
+}
+
+.event-details {
+  background: #f8f9fa;
+  padding: 10px;
+  border-radius: 8px;
+  margin-top: 10px;
+}
+
+.event-details p {
+  margin: 8px 0;
+  font-size: 14px;
+  color: #555;
+}
+
+.event-details strong {
+  color: #333;
+}
+
+.reminders-list p {
+  text-align: center;
+  font-size: 14px;
+  color: #777;
+}
+
+@media (max-width: 768px) {
+  .reminders-list {
+    width: 90%;
+    margin: auto;
+  }
+}
+
+
 h2 {
   text-align: center;
   color: #333;
@@ -121,4 +195,35 @@ li {
 
 .event-form button:hover {
   background: #e04555;
+}
+
+
+.delete-btn {
+  background: none;  /* Remove background */
+  border: none;  /* Remove border */
+  color: red;  /* Change color to red (or any other color) */
+  font-size: 12px;  /* Adjust size */
+  cursor: pointer;
+  padding: 2px;  /* Add slight padding */
+  margin-left: 5px;  /* Space from text */
+}
+
+.delete-btn:hover {
+  color: darkred;  /* Darker red on hover */
+}
+
+.checkbox-container {
+  display: flex;
+  align-items: center;
+  gap: 8px; /* Spacing between checkbox and label */
+  font-size: 14px;
+  color: #333;
+  font-weight: 500;
+}
+
+.checkbox-container input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  accent-color: #00b894; /* Custom color */
+  cursor: pointer;
 }
